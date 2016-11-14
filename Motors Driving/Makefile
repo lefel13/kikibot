@@ -15,7 +15,7 @@ LIB=motorsDriving
 all: test lib
 
 test: testMotorsDriving.o
-	$(CC) -L$(LIBDIR) -Wl,-rpath=$(LIBDIR) $^ -o $(EXEC) -l$(LIB)
+	$(CC) -L$(LIBDIR) -Wl,-rpath=$(LIBDIR) $^ -o $(EXEC) -l$(LIB) -lwiringPi
 
 lib: motorsDriving.o
 	$(CC) -shared -o libmotorsDriving.so motorsDriving.o
