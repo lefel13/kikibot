@@ -1,3 +1,14 @@
+/**
+ * \file motorsDriving.c
+ * \brief Fonctions de pilotage moteurs.
+ * \author lefel13
+ * \version 0.0.1
+ * \date 08/01/2017
+ *
+ * Source des fonctions de pilotage des moteurs du robot.
+ *
+ */
+
 #include <stdio.h>
 
 #include "motorsDriving.h"
