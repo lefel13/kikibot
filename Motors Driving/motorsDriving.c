@@ -53,3 +53,68 @@ void motors_init(void)
 	/* Extinction LED pour signaler fin d'activité */
 	digitalWrite(PIN_LED, LOW);
 }
+
+void motors_moveForward(void)
+{
+	/* Moteur 1 = Moteur gauche */
+	digitalWrite(PIN_INPUT_1, HIGH);
+	digitalWrite(PIN_INPUT_2, LOW);
+	/* Moteur 2 = Moteur droite */
+	digitalWrite(PIN_INPUT_3, HIGH);
+	digitalWrite(PIN_INPUT_4, LOW);
+	
+	pwmWrite(PIN_ENABLE_1, PWM_FULL);	/* Démarrage moteur 1 */
+	pwmWrite(PIN_ENABLE_2, PWM_FULL);	/* Démarrage moteur 2 */
+}
+
+void motors_moveBack(void)
+{
+	/* Moteur 1 = Moteur gauche */
+	digitalWrite(PIN_INPUT_1, LOW);
+	digitalWrite(PIN_INPUT_2, HIGH);
+	/* Moteur 2 = Moteur droite */
+	digitalWrite(PIN_INPUT_3, LOW);
+	digitalWrite(PIN_INPUT_4, HIGH);
+	
+	pwmWrite(PIN_ENABLE_1, PWM_FULL);	/* Démarrage moteur 1 */
+	pwmWrite(PIN_ENABLE_2, PWM_FULL);	/* Démarrage moteur 2 */
+}
+
+void motors_moveRight(void)
+{
+	/* Moteur 1 = Moteur gauche */
+	digitalWrite(PIN_INPUT_1, HIGH);
+	digitalWrite(PIN_INPUT_2, LOW);
+	/* Moteur 2 = Moteur droite */
+	digitalWrite(PIN_INPUT_3, HIGH);
+	digitalWrite(PIN_INPUT_4, LOW);
+	
+	pwmWrite(PIN_ENABLE_1, PWM_FULL);	/* Démarrage moteur 1 */
+	pwmWrite(PIN_ENABLE_2, PWM_MID);	/* Démarrage moteur 2 */
+}
+
+void motors_moveLeft(void)
+{
+	/* Moteur 1 = Moteur gauche */
+	digitalWrite(PIN_INPUT_1, HIGH);
+	digitalWrite(PIN_INPUT_2, LOW);
+	/* Moteur 2 = Moteur droite */
+	digitalWrite(PIN_INPUT_3, HIGH);
+	digitalWrite(PIN_INPUT_4, LOW);
+	
+	pwmWrite(PIN_ENABLE_1, PWM_MID);	/* Démarrage moteur 1 */
+	pwmWrite(PIN_ENABLE_2, PWM_FULL);	/* Démarrage moteur 2 */
+}
+
+void motors_stop(void)
+{
+	/* Moteur 1 = Moteur gauche */
+	digitalWrite(PIN_INPUT_1, LOW);
+	digitalWrite(PIN_INPUT_2, LOW);
+	/* Moteur 2 = Moteur droite */
+	digitalWrite(PIN_INPUT_3, LOW);
+	digitalWrite(PIN_INPUT_4, LOW);
+	
+	pwmWrite(PIN_ENABLE_1, PWM_STOP);	/* Arret moteur 1 */
+	pwmWrite(PIN_ENABLE_2, PWM_STOP);	/* Arret moteur 2 */
+}
