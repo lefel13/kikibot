@@ -29,4 +29,3 @@ testMotorsDriving.o: testMotorsDriving.c
 clean:
 	$(RM) *.o
 	$(RM) *.so
-	
