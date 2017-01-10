@@ -14,13 +14,13 @@
 
 /* Pins definition */
 /* Note : identification des broches selon connecteur P1 de la RPI */
-#define PIN_LED			18
-#define PIN_ENABLE_1	4
-#define PIN_INPUT_1		17
-#define PIN_INPUT_2		22
-#define PIN_ENABLE_2	23
-#define PIN_INPUT_3		24
-#define PIN_INPUT_4		25
+#define PIN_LED			12
+#define PIN_ENABLE_1	7
+#define PIN_INPUT_1		11
+#define PIN_INPUT_2		15
+#define PIN_ENABLE_2	16
+#define PIN_INPUT_3		18
+#define PIN_INPUT_4		22
 
 
 /**
