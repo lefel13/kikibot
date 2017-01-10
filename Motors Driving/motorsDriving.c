@@ -22,10 +22,10 @@ void motors_init(void)
 {
 	/* 
 	 * Initialisation de la librairie wiringPi pour utilisation du GPIO
-	 * Utilisation de la méthode wiringPiSetupPhys 
-	 * pour utiliser les numéros de broches du connecteur P1
+	 * Utilisation de la méthode wiringPiSetup
+	 * pour utiliser les numéros de broches selon identification dans wiringPi
 	 */
-	wiringPiSetupPhys();
+	wiringPiSetup();
 	
 	/* Configuration des pins */
 	pinMode(PIN_LED, OUTPUT);

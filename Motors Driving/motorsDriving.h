@@ -13,14 +13,14 @@
 #define _MOTORS_DRIVING_H_
 
 /* Pins definition */
-/* Note : identification des broches selon connecteur P1 de la RPI */
-#define PIN_LED			12
+/* Note : identification des broches selon identification dans wiringPi */
+#define PIN_LED			1
 #define PIN_ENABLE_1	7
-#define PIN_INPUT_1		11
-#define PIN_INPUT_2		15
-#define PIN_ENABLE_2	16
-#define PIN_INPUT_3		18
-#define PIN_INPUT_4		22
+#define PIN_INPUT_1		0
+#define PIN_INPUT_2		3
+#define PIN_ENABLE_2	4
+#define PIN_INPUT_3		5
+#define PIN_INPUT_4		6
 
 
 /**
