@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #include "wiringPi.h"
 
@@ -15,6 +16,10 @@ int main(int argc, char* argv[])
 	FILE*		recordFile					= NULL;
 	char		fileName[FILE_NAME_LEN];
 	int			closeErr;
+	
+	int			i;
+	int			pinP1;
+	
 	
 	currentSeconds = time(NULL);
 	currentTime = *localtime(&currentSeconds);
@@ -38,8 +43,27 @@ int main(int argc, char* argv[])
 	wiringPiSetup();
 	printf("[!] Wiring Pi set up.\n");
 	
+	for(i = 0; i <= WIRING_PI_MAX_PIN_ID; i++)
+	{
+		pinMode(i, OUTPUT);
+		printf("[!] Wiring Pi pin %d set as OUTPUT.\n", i);
+		digitalWrite(i, LOW);
+		printf("[!] Wiring Pi pin %d set LOW.\n", i);
+	}
+	
+	for(i = 0; i <= WIRING_PI_MAX_PIN_ID; i++)
+	{
+		digitalWrite(i, HIGH);
+		printf("[!] Wiring Pi pin %d set HIGH.\n", i);
+		printf("[!] Wiring Pi pin %d is P1 pin ? : ", i);
+		scanf("%d", &pinP1);
+		fprintf(recordFile, "WiringPi:%d => P1:%d\n", i, pinP1);
+		digitalWrite(i, LOW);
+		printf("[!] Wiring Pi pin %d set LOW.\n", i);
+	}
+	
 	closeErr = fclose(recordFile);
-		if(closeErr == 0)
+	if(closeErr == 0)
 	{
 		printf("[!] File %s closed.\n", fileName);
 	}
