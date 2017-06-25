@@ -10,12 +10,13 @@
  */
 
 #include <stdio.h>
+#include <wiringPi.h>
+#include <softPwm.h>
 
 #include "motorsDriving.h"
-#include "wiringPi.h"
 
 #define PWM_STOP		0
-#define PWM_FULL		1024
+#define PWM_FULL		100
 #define PWM_MID			(PWM_FULL / 2)
 
 void motors_init(void)
@@ -29,12 +30,12 @@ void motors_init(void)
 	
 	/* Configuration des pins */
 	pinMode(PIN_LED, OUTPUT);
-	pinMode(PIN_ENABLE_1, PWM_OUTPUT); 		//Note : à vérifier compatibilité PWM
 	pinMode(PIN_INPUT_1, OUTPUT);
 	pinMode(PIN_INPUT_2, OUTPUT);
-	pinMode(PIN_ENABLE_2, PWM_OUTPUT); 		//Note : à vérifier compatibilité PWM
 	pinMode(PIN_INPUT_3, OUTPUT);
 	pinMode(PIN_INPUT_4, OUTPUT);
+	softPwmCreate(PIN_ENABLE_1, PWM_STOP, PWM_FULL);
+	softPwmCreate(PIN_ENABLE_2, PWM_STOP, PWM_FULL);
 	
 	/* Allumage LED pour signaler présence d'activité */
 	digitalWrite(PIN_LED, HIGH);
@@ -44,8 +45,8 @@ void motors_init(void)
 	digitalWrite(PIN_INPUT_2, LOW);
 	digitalWrite(PIN_INPUT_3, LOW);
 	digitalWrite(PIN_INPUT_4, LOW);
-	pwmWrite(PIN_ENABLE_1, PWM_STOP);
-	pwmWrite(PIN_ENABLE_2, PWM_STOP);
+	softPwmWrite(PIN_ENABLE_1, PWM_STOP);
+	softPwmWrite(PIN_ENABLE_2, PWM_STOP);
 	
 	/* Temporisation (ms) */
 	delay(500);
@@ -63,8 +64,8 @@ void motors_moveForward(void)
 	digitalWrite(PIN_INPUT_3, HIGH);
 	digitalWrite(PIN_INPUT_4, LOW);
 	
-	pwmWrite(PIN_ENABLE_1, PWM_FULL);	/* Démarrage moteur 1 */
-	pwmWrite(PIN_ENABLE_2, PWM_FULL);	/* Démarrage moteur 2 */
+	softPwmWrite(PIN_ENABLE_1, PWM_FULL);	/* Démarrage moteur 1 */
+	softPwmWrite(PIN_ENABLE_2, PWM_FULL);	/* Démarrage moteur 2 */
 }
 
 void motors_moveBack(void)
@@ -76,8 +77,8 @@ void motors_moveBack(void)
 	digitalWrite(PIN_INPUT_3, LOW);
 	digitalWrite(PIN_INPUT_4, HIGH);
 	
-	pwmWrite(PIN_ENABLE_1, PWM_FULL);	/* Démarrage moteur 1 */
-	pwmWrite(PIN_ENABLE_2, PWM_FULL);	/* Démarrage moteur 2 */
+	softPwmWrite(PIN_ENABLE_1, PWM_FULL);	/* Démarrage moteur 1 */
+	softPwmWrite(PIN_ENABLE_2, PWM_FULL);	/* Démarrage moteur 2 */
 }
 
 void motors_moveRight(void)
@@ -89,8 +90,8 @@ void motors_moveRight(void)
 	digitalWrite(PIN_INPUT_3, HIGH);
 	digitalWrite(PIN_INPUT_4, LOW);
 	
-	pwmWrite(PIN_ENABLE_1, PWM_FULL);	/* Démarrage moteur 1 */
-	pwmWrite(PIN_ENABLE_2, PWM_MID);	/* Démarrage moteur 2 */
+	softPwmWrite(PIN_ENABLE_1, PWM_FULL);	/* Démarrage moteur 1 */
+	softPwmWrite(PIN_ENABLE_2, PWM_MID);	/* Démarrage moteur 2 */
 }
 
 void motors_moveLeft(void)
@@ -102,8 +103,8 @@ void motors_moveLeft(void)
 	digitalWrite(PIN_INPUT_3, HIGH);
 	digitalWrite(PIN_INPUT_4, LOW);
 	
-	pwmWrite(PIN_ENABLE_1, PWM_MID);	/* Démarrage moteur 1 */
-	pwmWrite(PIN_ENABLE_2, PWM_FULL);	/* Démarrage moteur 2 */
+	softPwmWrite(PIN_ENABLE_1, PWM_MID);	/* Démarrage moteur 1 */
+	softPwmWrite(PIN_ENABLE_2, PWM_FULL);	/* Démarrage moteur 2 */
 }
 
 void motors_stop(void)
@@ -115,6 +116,6 @@ void motors_stop(void)
 	digitalWrite(PIN_INPUT_3, LOW);
 	digitalWrite(PIN_INPUT_4, LOW);
 	
-	pwmWrite(PIN_ENABLE_1, PWM_STOP);	/* Arret moteur 1 */
-	pwmWrite(PIN_ENABLE_2, PWM_STOP);	/* Arret moteur 2 */
+	softPwmWrite(PIN_ENABLE_1, PWM_STOP);	/* Arret moteur 1 */
+	softPwmWrite(PIN_ENABLE_2, PWM_STOP);	/* Arret moteur 2 */
 }

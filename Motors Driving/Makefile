@@ -7,18 +7,19 @@
 #définition des variables
 CC=gcc
 CFLAGS=-Wall -Werror
+LDFLAGS=-lwiringPi -lpthread
 RM=rm -rf
 EXEC=testlib
-LIBDIR="/home/pi/kikibot/Motors Driving"
+LIBDIR="/home/pi/dev/MotorsDriving"
 LIB=motorsDriving
 
-all: test lib
+all: lib test
 
 test: testMotorsDriving.o
-	$(CC) -L$(LIBDIR) -Wl,-rpath=$(LIBDIR) $^ -o $(EXEC) -l$(LIB) -lwiringPi
+	$(CC) -L$(LIBDIR) -Wl,-rpath=$(LIBDIR) $^ -o $(EXEC) -l$(LIB)
 
 lib: motorsDriving.o
-	$(CC) -shared -o libmotorsDriving.so motorsDriving.o
+	$(CC) -shared -o libmotorsDriving.so motorsDriving.o $(LDFLAGS)
 
 motorsDriving.o: motorsDriving.c	
 	$(CC) -c $(CFLAGS) -fpic $<
@@ -29,3 +30,4 @@ testMotorsDriving.o: testMotorsDriving.c
 clean:
 	$(RM) *.o
 	$(RM) *.so
+	$(RM) $(EXEC)
